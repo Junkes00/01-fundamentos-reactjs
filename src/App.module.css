@@ -1,0 +1,10 @@
+.wrapper {
+  max-width: 70rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+
+  display: grid;
+  grid-template-columns: 250px 1fr; /* fr = tamanho flexivel e não fixo (px) */
+  gap: 2rem;
+  align-items: flex-start; /* Força a side bar a ficar com um tamanho menor e diferente do post*/
+}
