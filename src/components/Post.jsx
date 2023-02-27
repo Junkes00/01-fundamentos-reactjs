@@ -1,6 +1,35 @@
+import { format, formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
+import { useState } from "react";
+
+import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
 export function Post({ author, publishedAt, content }) {
+  const [comments, setComments] = useState(["Post muito bacana, hein?!"]);
+  const [newCommentText, setNewCommentText] = useState("");
+
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    { locale: ptBR }
+  );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
+
+  function handleCreateNewComment() {
+    event.preventDefault();
+
+    setComments([...comments, newCommentText]);
+    setNewCommentText("");
+  }
+
+  function handleNewCommentText() {
+    setNewCommentText(event.target.value);
+  }
   return (
     <article className={styles.post}>
       <header>
@@ -37,10 +66,20 @@ export function Post({ author, publishedAt, content }) {
         })}
       </div>
 
-            <p>
-              <a href="#">#novoprojeto #nlw #rocketseat</a>
-            </p>
-          </p>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+
+        <textarea
+          name="comment"
+          placeholder="Deixe um comentário"
+          value={newCommentText}
+          onChange={handleNewCommentText}
+        />
+
+        <footer>
+          <button type="submit">Publicar</button>
+        </footer>
+      </form>
         </div>
       </header>
     </article>
