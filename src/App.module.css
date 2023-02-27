@@ -8,3 +8,21 @@
   gap: 2rem;
   align-items: flex-start; /* Força a side bar a ficar com um tamanho menor e diferente do post*/
 }
+
+/* 
+  * Cria uma regra para quando o tamanho da tela for menor que 768px,
+  * escpecifica que a grid deve ter apenas uma coluna
+*/
+@media (max-width: 768px) {
+  /* 16 => 100 
+    14 => x
+    14 * 100 / 16 = 87.5
+  */
+  html {
+    font-size: 87.5%;
+  }
+
+  .wrapper {
+    grid-template-columns: 1fr;
+  }
+}
