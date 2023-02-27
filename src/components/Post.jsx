@@ -2,6 +2,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { useState } from "react";
 
+import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 
@@ -43,10 +44,7 @@ export function Post({ author, publishedAt, content }) {
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img
-            className={styles.avatar}
-            src="https://github.com/Junkes00.png"
-          />
+          <Avatar src={author.avatarUrl} />
           <div className={styles.authorInfo}>
             <strong>{author.name}</strong>
             <span>{author.role}</span>
@@ -61,7 +59,7 @@ export function Post({ author, publishedAt, content }) {
         </time>
       </header>
 
-        <div className={styles.content}>
+      <div className={styles.content}>
         {content.map((line) => {
           if (line.type === "paragraph") {
             return <p key={line.content}>{line.content}</p>;
@@ -69,7 +67,7 @@ export function Post({ author, publishedAt, content }) {
             return (
               <p key={line.content}>
                 <a href="http:#">{line.content}</a>
-            </p>
+              </p>
             );
           }
         })}
@@ -100,8 +98,7 @@ export function Post({ author, publishedAt, content }) {
             />
           );
         })}
-        </div>
-      </header>
+      </div>
     </article>
   );
 }
